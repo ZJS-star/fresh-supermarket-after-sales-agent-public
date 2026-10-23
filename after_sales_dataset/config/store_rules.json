@@ -1,0 +1,19 @@
+{
+  "label":"模拟门店规则，仅用于本地开发，不代表真实门店承诺",
+  "version":"sim-2026-10-v1",
+  "store_id":"STORE_SIM_01",
+  "timezone":"Asia/Shanghai",
+  "applicable_categories":["榴莲","西瓜","葡萄","菠萝蜜","山竹","甜瓜"],
+  "issue_types":["visible_discoloration","odor_claim","uncertain","identity_conflict","safety_escalation"],
+  "hours":{"open":"08:00","close":"21:00","appointment_start":"09:00","appointment_end":"20:00","slot_minutes":30},
+  "rules":[
+    {"id":"R1","condition":"订单、商品、数量核实且材料支持外观问题","allowed":["refund_proposal","exchange_proposal","store_inspection","human_takeover"],"human_confirmation_required":true},
+    {"id":"R2","condition":"气味、原因、食品安全无法由图片独立确认，或购买超过48小时，或时间不明确","allowed":["request_evidence","store_inspection","human_takeover"],"human_confirmation_required":true},
+    {"id":"R3","condition":"商品/规格不符、多候选、无票现金、不同步","allowed":["clarify_purchase","human_takeover"],"human_confirmation_required":true},
+    {"id":"R4","condition":"换货库存为0或unknown","allowed":["refund_proposal_with_consent","wait_stock_confirmation","human_takeover"],"human_confirmation_required":true},
+    {"id":"R5","condition":"顾客声称食用后不适、负责人接管或严重争议","allowed":["human_takeover"],"human_confirmation_required":true}
+  ],
+  "refund_arithmetic":"整数分；订单优惠按明细原价最大余数法分摊；部分退按实付累计比例向下取整扣已退；最后一次吸收余数；扣除待审核占用额度",
+  "all_money_movement_requires_staff":true,
+  "insufficient_evidence_is_not_automatic_rejection":true
+}

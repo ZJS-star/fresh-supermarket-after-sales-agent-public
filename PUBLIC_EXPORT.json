@@ -1,0 +1,10 @@
+{
+  "release_kind": "clean_public_source_export_without_private_git_history",
+  "source_version": "32eaa69",
+  "raw_private_media_included": false,
+  "private_cases_and_oracles_included": false,
+  "runtime_or_requests_included": false,
+  "initial_database_rows": 0,
+  "product_sample": "code_generated_placeholder_not_visual_evidence",
+  "screenshots": "actual previous browser captures of simulated business; PNG converted from native JPEG; no native high-DPR claim"
+}

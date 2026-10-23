@@ -1,0 +1,10 @@
+CREATE TABLE after_sales(record_id TEXT PRIMARY KEY,item_id TEXT REFERENCES order_items,refunded_quantity INTEGER,refunded_cents INTEGER,status TEXT,updated_at TEXT);
+CREATE TABLE audit(sequence INTEGER PRIMARY KEY AUTOINCREMENT,actor_id TEXT,action TEXT,object_id TEXT,body TEXT);
+CREATE TABLE inventory(sku TEXT PRIMARY KEY REFERENCES products,quantity INTEGER,unit TEXT,updated_at TEXT);
+CREATE TABLE opening_hours(store_id TEXT PRIMARY KEY,body TEXT);
+CREATE TABLE operations(request_key TEXT PRIMARY KEY,actor_id TEXT,response TEXT);
+CREATE TABLE order_items(item_id TEXT PRIMARY KEY,order_id TEXT REFERENCES orders,sku TEXT REFERENCES products,quantity INTEGER CHECK(quantity>0),unit TEXT,unit_price_cents INTEGER,price_basis_quantity INTEGER,gross_cents INTEGER,discount_cents INTEGER,paid_cents INTEGER CHECK(paid_cents>=0),pricing_adjustment_cents INTEGER);
+CREATE TABLE orders(order_id TEXT PRIMARY KEY,actor_id TEXT,store_id TEXT,purchased_at TEXT,channel TEXT,payment_method TEXT,gross_cents INTEGER,discount_cents INTEGER,paid_cents INTEGER,status TEXT,synced INTEGER,receipt_ref TEXT);
+CREATE TABLE products(sku TEXT PRIMARY KEY,name TEXT,aliases TEXT,category TEXT,spec TEXT,unit TEXT);
+CREATE TABLE rules(version TEXT PRIMARY KEY,body TEXT);
+CREATE TABLE tickets(ticket_id TEXT PRIMARY KEY,actor_id TEXT,case_scope TEXT,item_id TEXT REFERENCES order_items,status TEXT,quantity INTEGER,amount_cents INTEGER,body TEXT,dedupe_key TEXT UNIQUE,created_at TEXT);
